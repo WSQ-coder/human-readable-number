@@ -1,5 +1,5 @@
 module.exports = function toReadable(number) {
-    let result, ones, tens, hundreds;
+    let result, ones, tens, hundreds, twoDigits;
     const strNumbers = {
         0: "zero",
         1: "one",
@@ -30,28 +30,26 @@ module.exports = function toReadable(number) {
         80: "eighty",
         90: "ninety",
     };
+		// Simple numbers - take from the list 
     if (number in strNumbers) return strNumbers[number];
     if (number > 999 || number <= 0)
         return "Error: '" + number + "' is out of range!";
 
-    //== process the composite numbers */
+    //====== the composite numbers */
+    result = [];
     [hundreds, tens, ones] = ("0000" + number).slice(-3).split("").map(Number);
 
-    result = [];
     if (hundreds > 0) result.push(strNumbers[hundreds] + " hundred");
+		if (tens==0 && ones==0) return result.join(" ");
 
-    if (ones + 10 * tens in strNumbers  && (ones + 10 * tens)>0) {
-        result.push(strNumbers[ones + 10 * tens]);
+    twoDigits = 10 * tens + ones;
+    if (twoDigits in strNumbers) {
+        result.push(strNumbers[twoDigits]);
         return result.join(" ");
     }
 
-    if (tens > 0) {
-        result.push(strNumbers[tens * 10]);
-    }
-
-    if (ones > 0) {
-        result.push(strNumbers[ones]);
-    }
+		if (tens > 0) result.push(strNumbers[tens * 10]);
+    if (ones > 0) result.push(strNumbers[ones]);
 
     return result.join(" ");
 };
