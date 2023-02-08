@@ -1,3 +1,12 @@
+## RS.SCHOOL 
+
+stage#0  [JS/FE Pre-School 2022q4](https://github.com/rolling-scopes-school/tasks/tree/master/stage0)
+
+***
+***
+
+
+
 # Human Readable Number
 
 ## Task
